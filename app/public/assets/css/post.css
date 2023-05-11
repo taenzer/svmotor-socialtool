@@ -1,0 +1,55 @@
+/* POST LIST */
+.post-list{
+    padding: 20px 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+.post-list > a{
+    flex-basis: 100%;
+}
+.post-list-item{
+    display: grid;
+    background: white;
+    padding: 15px 20px;
+    border-radius: 5px;
+    grid-template-columns: auto 1fr 1fr 1fr 1fr 1fr;
+    gap: 30px;
+    text-decoration: none;
+    align-items: center;
+    box-shadow: 7px 7px 10px -10px #00000036;
+}
+
+.pli-pid p{
+    display: inline-block;
+    background: #dedede;
+    font-size: 0.7em;
+    padding: 2px 4px;
+    border-radius: 2px;
+    font-weight: bold;
+}
+
+.pli-main .pli-dtRange{
+    font-size: 1.2em;
+    font-weight: bold;
+    line-height: 1.3em;
+}
+
+.pli-main .pli-title, 
+.pli-created .pli-userCreated, 
+.pli-edited .pli-userEdited{
+    font-style: italic;
+    opacity: 0.8;
+    font-size: 0.9em;
+}
+.pli-actions{
+    display: flex;
+    gap: 10px;
+    justify-content: right;
+}
+.pli-action{
+    border: 1px solid;
+    display: flex;
+    padding: 10px;
+}
+

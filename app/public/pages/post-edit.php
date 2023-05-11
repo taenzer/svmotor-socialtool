@@ -1,40 +1,40 @@
 <?php 
 require_once("../inc/class-post.php");
 define("PAGE_TITLE", "Post bearbeiten");
+
+$post = new SocialPost(isset($_GET["pid"]) ? $_GET["pid"] : false);
+if(!empty($_POST)){
+    $post->formAction($_POST);
+}
 ?>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="/assets/js/post-edit.js"></script>
 <h3 class="page-title">Neuen Post erstellen</h3>
-<form action="">
+<form action="" method="POST">
     <div class="form-group">
         <p class="form-group-title">Allgemeine Optionen</p>
         <label for="title">Post-Titel (intern)</label>
-        <input type="text" name="title" id="title">
+        <input type="text" name="title" id="title" value="<?php echo $post->get("title"); ?>">
         <label for="dtFrom">Startdatum</label>
-        <input type="date" name="dtFrom" id="dtFrom">
+        <input type="date" name="dtStart" id="dtStart" value="<?php echo $post->get("dtStart"); ?>">
         <label for="dtTo">Enddatum</label>
-        <input type="date" name="dtTo" id="dtTo">
+        <input type="date" name="dtEnd" id="dtEnd" value="<?php echo $post->get("dtEnd"); ?>">
     </div>
     
     <div class="form-group">
         <p class="form-group-title">Post Inhalte</p>
-        <a href="#" class="add-event">Inhalt hinzufügen</a>
+        <div id="eventWrap">
+            <?php 
+                $events = $post->get("events");
+                foreach($events as $id => $event){
+                    echo $post->getEventHtml($id, $event);
+                }
+            ?>
+        </div>
+        <a href="#" class="add-event" id="add-event">Inhalt hinzufügen</a>
     </div>
-    <div class="event">
-        <input type="datetime-local" name="start" id="" placeholder="Startzeit">
-        <select name="abteilung" id="abteilung">
-            <option value="tischtennis">Tischtennis</option>
-            <option value="fussball">Fussball</option>
-        </select>
-        <input type="text" name="location" placeholder="Location">
-        <select name="art" id="art">
-            <option value="match">Spiel</option>
-            <option value="termin">Termin</option>
-        </select>
-
-        <input type="text" name="desc" id="" placeholder="Veranstaltungstitel">
-
-        <!-- MATCH Content -->
-        <input type="text" name="heim" id="" placeholder="Heimmannschaft">
-        <input type="text" name="gegner" placeholder="Gastmannschaft">
-
+    <div class="form-group">
+        <p class="form-group-title">Aktionen</p>
+        <input type="submit" name="save_post" value="Post speichern">
     </div>
 </form>

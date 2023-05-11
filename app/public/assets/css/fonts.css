@@ -1,0 +1,79 @@
+@font-face {
+    font-family: 'Material Icons';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Material Icons'),
+         url('../fonts/MaterialIcons.ttf') format('truetype');
+ }
+ @font-face {
+    font-family: 'Material Icons Outlined';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Material Icons'),
+         url('../fonts/MaterialIconsOutlined.otf') format('opentype');
+ }
+ @font-face {
+    font-family: 'Material Icons Round';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Material Icons'),
+         url('../fonts/MaterialIconsRound.otf') format('opentype');
+ }
+ @font-face {
+    font-family: 'Material Icons Sharp';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Material Icons'),
+         url('../fonts/MaterialIconsSharp.otf') format('opentype');
+ }
+ @font-face {
+    font-family: 'Material Icons TwoTone';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Material Icons'),
+         url('../fonts/MaterialIconsTwoTone.otf') format('opentype');
+ }
+ 
+ .icon {
+   font-family: 'Material Icons';
+   font-weight: normal;
+   font-style: normal;
+   vertical-align: bottom;
+   display: inline-block;
+   line-height: 1;
+   text-transform: none;
+   letter-spacing: normal;
+   word-wrap: normal;
+   white-space: nowrap;
+   direction: ltr;
+ 
+   /* Support for all WebKit browsers. */
+   -webkit-font-smoothing: antialiased;
+   /* Support for Safari and Chrome. */
+   text-rendering: optimizeLegibility;
+ 
+   /* Support for Firefox. */
+   -moz-osx-font-smoothing: grayscale;
+ 
+   /* Support for IE. */
+   font-feature-settings: 'liga';
+ }
+ 
+ .icon.outlined{
+   font-family: 'Material Icons Outlined';
+ }
+ 
+ .icon.sharp{
+   font-family: 'Material Icons Sharp';
+ }
+ 
+ .icon.round{
+   font-family: 'Material Icons Round';
+ }
+ 
+ .icon.twotone{
+   font-family: 'Material Icons Twotone';
+ }
+ 
+ 
+ 
