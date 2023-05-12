@@ -215,28 +215,55 @@ class SocialPost extends DB {
     public static function getEventHtml($id, $eventData = array()){
         ob_start();
         ?>
-            <div class="event" data-eventtype="<?php echo isset($eventData["art"]) ? $eventData["art"] : "";?>">
-                <input type="datetime-local" name="events[<?php echo $id; ?>][start]" placeholder="Startzeit" value="<?php echo isset($eventData["start"]) ? $eventData["start"] : ""; ?>">
-                <select name="events[<?php echo $id; ?>][abteilung]" id="abteilung">
+            <div class="event" data-eventtype="<?php echo isset($eventData["art"]) ? $eventData["art"] : "match";?>">
+              <div class="event-general">
+                <p class="input-wrap">
+                  <label>Wann?</label>
+                  <input type="datetime-local" name="events[<?php echo $id; ?>][start]" placeholder="Startzeit" value="<?php echo isset($eventData["start"]) ? $eventData["start"] : ""; ?>">
+                </p>
+                <p class="input-wrap">
+                  <label>Wo?</label>
+                  <input type="text" name="events[<?php echo $id; ?>][location]" placeholder="Location" value="<?php echo isset($eventData["location"]) ? $eventData["location"] : ""; ?>">
+                </p>
+              </div> 
+              <div class="event-detail">
+                <p class="input-wrap">
+                  <label>Abteilung</label>
+                  <select name="events[<?php echo $id; ?>][abteilung]" id="abteilung">
                     <?php
                     foreach(SocialPost::getAbteilungen() as $key => $abteilung){
                         $selected = isset($eventData["abteilung"]) && $eventData["abteilung"] == $key ? "selected" : "";
                         echo("<option value='{$key}' {$selected}>{$abteilung}</option>");
                     }
                     ?>
-                </select>
-                <input type="text" name="events[<?php echo $id; ?>][location]" placeholder="Location" value="<?php echo isset($eventData["location"]) ? $eventData["location"] : ""; ?>">
-                <select class="eventType" name="events[<?php echo $id; ?>][art]" id="art">
+                  </select>
+                </p>
+                <p class="input-wrap">
+                  <label>Veranstaltungsart</label>
+                  <select class="eventType" name="events[<?php echo $id; ?>][art]" id="art">
                     <option value="match" <?php echo isset($eventData["art"]) && $eventData["art"] == "match" ? "selected" : "";?>>Spiel</option>
                     <option value="date" <?php echo isset($eventData["art"]) && $eventData["art"] == "date" ? "selected" : "";?>>Termin</option>
-                </select>
-
-                <input type="text" name="events[<?php echo $id; ?>][title]" id="" placeholder="Veranstaltungstitel" value="<?php echo isset($eventData["title"]) ? $eventData["title"] : ""; ?>"> 
-
+                  </select>
+                </p>
+              </div> 
+              <div class="event-info">
+                <p class="input-wrap">
+                  <label>Veranstaltungstitel</label>
+                  <input type="text" name="events[<?php echo $id; ?>][title]" id="" placeholder="Veranstaltungstitel" value="<?php echo isset($eventData["title"]) ? $eventData["title"] : ""; ?>">
+                </p>
                 <!-- MATCH Content -->
-                <input type="text" class="heim" name="events[<?php echo $id; ?>][heim]" id="" placeholder="Heimmannschaft" value="<?php echo isset($eventData["heim"]) ? $eventData["heim"] : ""; ?>">
-                <input type="text" class="gegner" name="events[<?php echo $id; ?>][gegner]" placeholder="Gastmannschaft" value="<?php echo isset($eventData["gegner"]) ? $eventData["gegner"] : ""; ?>">
-                <a href="#" class="eventDel">DEL</a>
+                <div class="event-type-match">
+                  <div class="team">
+                    <label>Heim</label>
+                    <input type="text" class="heim" name="events[<?php echo $id; ?>][heim]" id="" placeholder="Heim-Mannschaft" value="<?php echo isset($eventData["heim"]) ? $eventData["heim"] : ""; ?>">
+                  </div>  
+                  <div class="team">
+                    <label>Gast</label>
+                    <input type="text" class="gegner" name="events[<?php echo $id; ?>][gegner]" placeholder="Gast-Mannschaft" value="<?php echo isset($eventData["gegner"]) ? $eventData["gegner"] : ""; ?>">
+                  </div>               
+                </div>
+              </div>
+              <a href="#" class="eventDel"><span class="icon">delete</span></a>
             </div>
         <?php
         return ob_get_clean(); 

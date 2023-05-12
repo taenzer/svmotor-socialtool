@@ -8,7 +8,8 @@ document.addEventListener("DOMContentLoaded", function(){
         addListerToEvent(existingEvent[i]);
     }
 
-    function newEvent(){
+    function newEvent(e){
+        e.preventDefault();
         $.ajax({
         url: "/ajax.php",
         dataType: "json",

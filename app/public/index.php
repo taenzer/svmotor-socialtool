@@ -61,6 +61,7 @@ $content = ob_get_clean();
             
         </section>
         <section id="content">
+          <h2 class="page-title"><?php echo defined("PAGE_TITLE") ? PAGE_TITLE : ""; ?></h2>
           <div class="notifications">
             <?php echo($messagesHtml); ?>
           </div>

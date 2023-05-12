@@ -67,3 +67,100 @@ body *{
     padding: 20px;
     color: white;
 }
+/* FORM ELEMENTS */
+input, select{
+    background: transparent;
+    outline: none;
+    border: 1px solid;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+input[type="submit"]{
+    cursor: pointer;
+}
+label{
+    margin-top: 10px;
+    font-size: 0.9em;
+    font-weight: bold;
+}
+
+.form-group{
+    border-bottom: 1px solid;
+    padding: 20px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.form-group:last-child{
+    border-bottom: none;
+}
+
+.form-group-title{
+    text-transform: uppercase;
+    font-weight: bolder;
+    background: linear-gradient(90deg, rgb(var(--dark-blue)), transparent);
+    color: white;
+    padding: 4px 8px;
+    text-shadow: 1px 1px rgb(var(--dark-blue));
+}
+
+/* NOTIFICATIONS */
+.notifications{
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 20px;
+    z-index: 100000;
+  }
+  .notification.error{
+    --msgColor: 185, 0 , 0;
+  }
+  .notification.success{
+    --msgColor: 85, 185 , 0;
+  }
+  .notification.info{
+    --msgColor: 0, 137 , 185;
+  }
+  
+  .notification{
+    cursor: pointer;
+    position: relative;
+    background: rgb(var(--littleLighter));
+    padding: 10px 20px;
+    display: flex;
+    gap: 10px;
+    border: 2px solid rgb(var(--msgColor));
+    align-items: center;
+  }
+  .notification:after{
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    border-radius: 10px;
+    background: linear-gradient(180deg, rgba(255,255,255, 0) 0%, rgba(var(--msgColor), 0.07) 100%);
+  }
+  
+  .notification > div{
+    position: relative;
+    z-index: 1;
+  }
+  
+  .notification .icon-wrp{
+    font-size: 1.5em;
+    color: rgb(var(--msgColor));
+    line-height: 1;
+  }
+  
+  .notification.error .icon-wrp .icon:not(.error){
+    display: none;
+  }
+  .notification.success .icon-wrp .icon:not(.success){
+    display: none;
+  }
+  .notification.info .icon-wrp .icon:not(.info){
+    display: none;
+  }

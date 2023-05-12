@@ -1,3 +1,73 @@
+/* EDIT POST */
+.edit-post-form{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto auto auto;
+    gap: 10px 50px;
+}
+
+.form-group.preview{
+    grid-area: 1 / 2 / 5 / 3;
+    border-bottom: none;
+}
+#eventWrap {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#eventWrap .event{
+    display: grid;
+    background: white;
+    padding: 15px 20px;
+    border-radius: 5px;
+    grid-template-columns: 2fr 1fr 3fr auto;
+    gap: 10px;
+    text-decoration: none;
+    align-items: top;
+    box-shadow: 7px 7px 10px -10px #00000036;
+}
+
+#eventWrap .event > div{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#eventWrap .event > div .input-wrap{
+    display: flex;
+    flex-direction: column;
+}
+
+#eventWrap .event > div label{
+    margin: 0;
+}
+#eventWrap .event .event-type-match{
+    display: none;
+}
+#eventWrap .event[data-eventtype="match"] .event-type-match{
+    display: flex;
+    gap: 10px;
+}
+#eventWrap .event[data-eventtype="match"] .event-type-match .team{
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+}
+
+#eventWrap input, #eventWrap select{
+    padding: 5px;
+    margin-top: 3px;
+}
+
+.events .add-event{
+    display: flex;
+    align-content: center;
+    background: white;
+    padding: 15px 20px;
+    border-radius: 5px;
+}
+
 /* POST LIST */
 .post-list{
     padding: 20px 0;
