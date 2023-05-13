@@ -44,7 +44,15 @@ class SocialPosts extends DB{
     }
   
     public function getFromDb(){
-      $sql = $this->mysqli->prepare("SELECT pid FROM posts;");
+      try {
+        $sql = $this->mysqli->prepare("SELECT pid FROM posts;");
+      } catch (\mysqli_sql_exception $err) {
+        global $lan;
+        $debugUrl = $this->getDbDebugLink();
+        $lan->addError("Datenbankfehler: ".$err->getMessage(), $debugUrl);
+        return array();
+      }
+      
       $sql->execute();
       $result = $sql->get_result();
       $result = $result->fetch_all(MYSQLI_ASSOC);
