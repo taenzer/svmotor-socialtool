@@ -1,0 +1,49 @@
+/* User LIST */
+.user-list{
+    padding: 20px 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+.user-list > a{
+    flex-basis: 100%;
+}
+.user-list-item{
+    display: grid;
+    background: white;
+    padding: 15px 20px;
+    border-radius: 5px;
+    grid-template-columns: auto 1fr 1fr;
+    gap: 30px;
+    text-decoration: none;
+    align-items: center;
+    box-shadow: 7px 7px 10px -10px #00000036;
+}
+
+.uli-pid p{
+    display: inline-block;
+    background: #dedede;
+    font-size: 0.7em;
+    padding: 2px 4px;
+    border-radius: 2px;
+    font-weight: bold;
+}
+.user-list-item.active .uli-pid p{
+    background: #8fc775;
+    color:#3a582c;
+}
+
+.user-list-item.not-active .uli-pid p .icon.active{
+    display: none;
+}
+.user-list-item.active .uli-pid p .icon.not-active{
+    display: none;
+}
+
+.uli-main .uli-name{
+    font-size: 1.2em;
+    font-weight: bold;
+    line-height: 1.3em;
+}
+
+

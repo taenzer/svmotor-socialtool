@@ -22,6 +22,6 @@ if($db->validateDebugParams($_GET["id"], $_GET["secret"])){
     }
 
 } else {
-    $lan->addError("Ungültiger Link", "/");
+    //$lan->addError("Ungültiger Link", "/");
 }
 
