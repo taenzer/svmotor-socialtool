@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+        body {
+            background: rgb(204,204,204); 
+            font-family: Arial, Helvetica, sans-serif;
+            line-height: 1;
+            
+        }
+        body *{
+            margin: 0;
+            box-sizing: border-box;
+        }
+        page {
+            background: white;
+            display: block;
+            margin: 0 auto !important;
+            margin-bottom: 0.5cm !important;
+            box-shadow: 0 0 0.5cm rgba(0,0,0,0.5);
+        }
+        page[size="A4"] {  
+            width: 21cm;
+            height: 29.7cm; 
+        }
+
+        .wrp{
+            padding: 2cm;
+            text-align: center;
+        }
+
+        .svhead{
+            text-align: center;
+            font-size: 1.1em;
+            letter-spacing: 3px;
+            font-weight: 100;
+        }
+
+        .mainhead{
+            text-transform: uppercase;
+            text-align: center;
+            font-size: 5em;
+            margin: 30px 0;
+            font-weight: 900;
+        }
+
+        h3.date{
+            background: black;
+            display: inline-block;
+            color: white;
+            padding: 10px 20px;
+            margin: 0 auto;
+            font-size: 2em;
+            border-radius: 5px;
+        }
+
+        .event{
+            background: #dedede;
+            margin: 10px 0;
+            padding: 20px 0 0 20px;
+            position: relative;
+        }
+        .vs-wrap{
+            text-align: right;
+        }
+        .event .vs{
+            position: relative;
+            font-size: 1.2em;
+            display: inline-block;
+        }
+        .event .vs p{
+            display: inline-block;
+            background: red;
+            padding: 10px 20px;
+            margin: 5px 0;
+        }
+
+        .event .vs p.heim{
+
+            padding-right: 40px;
+        }
+
+        .event .vs p.gast{
+
+            padding-left: 40px;
+        }
+
+        .event .vs p.x{
+            position: absolute;
+            background: white;
+            z-index: 1;
+            top: 50%;
+            padding: 10px;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            height: 100%;
+            margin: 0;
+            vertical-align: middle;
+        }
+
+        .evtitle{
+            text-align: left;
+            font-size: 1.4em;
+            font-weight:bold; 
+        }
+        .datetime{
+            text-align: left;
+            font-size: 1em;
+        }
+        .abteilung{
+            text-align: right;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+    </style>
+
+    <page size="A4">
+        <div class="wrp">
+            <h2 class="svhead">SV "MOTOR" TAMBACH-DIETHARZ E.V.</h2>
+            <h1 class="mainhead">Sportliche Highlights</h1>
+            <h3 class="date">14.05.2023 - 18.05.2023</h3>
+
+            <div class="events">
+                <div class="event match">
+                    <p class="datetime">14.05. 20:00 Uhr - Sportplatz</p>
+                    <p class="evtitle">Mini-Meisterschaft</p>
+                    <p class="abteilung">Abteilung<br>Fußball</p>
+                    <div class="vs-wrap">
+                        <div class="vs">
+                            <p class="heim">1. Mannschaft Herren</p>
+                            <p class="x">vs</p>
+                            <p class="gast">SG Fortuna Remstädt</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="event date">
+                    <p>14.05. 20:00 Uhr</p>
+                    <p>Tischtennis</p>
+                    <p>Sportplatz</p>
+                    <p>Mini-Meisterschaft</p>
+                </div>
+
+
+            </div>
+        </div>
+        
+    </page>
+    
+
+
+</body>
+</html>

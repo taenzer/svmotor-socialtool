@@ -26,11 +26,11 @@ class SocialPosts extends DB{
                 </div>
                 <div class="pli-created">
                     <p class="pli-dateCreated"><?php echo $post->get("created", true)->format("d.m.Y H:i")." Uhr"; ?></p>
-                    <p class="pli-userCreated">von System</p>
+                    <p class="pli-userCreated">von <?php $userCreated = new User($post->get("createdBy")); echo $userCreated->get("vorname"); ?></p>
                 </div>
                 <div class="pli-edited">
                     <p class="pli-dateEdited"><?php echo $post->get("edited", true)->format("d.m.Y H:i")." Uhr"; ?></p>
-                    <p class="pli-userEdited">von System</p>
+                    <p class="pli-userEdited">von <?php $userEdited = new User($post->get("editedBy")); echo $userEdited->get("vorname"); ?></p>
                 </div>
                 <div class="pli-actions">
                     <p class="pli-action preview"><span class="icon">visibility</span> Vorschau</p>
@@ -45,7 +45,7 @@ class SocialPosts extends DB{
   
     public function getFromDb(){
       try {
-        $sql = $this->mysqli->prepare("SELECT pid FROM posts;");
+        $sql = $this->mysqli->prepare("SELECT pid FROM posts ORDER BY edited DESC;");
       } catch (\mysqli_sql_exception $err) {
         global $lan;
         $debugUrl = $this->getDbDebugLink();
@@ -109,14 +109,15 @@ class SocialPost extends DB {
         return $this->postData[$key];
     }
     private function loadDefaults(){
+        global $_USER;
         $this->postData = array(
           "pid" => null,
           "title" => "",
           "dtStart" => date("Y-m-d"),
           "dtEnd" => date("Y-m-d"),
-          "createdBy" => 0,
+          "createdBy" => $_USER->get("userId"),
           "created" => date("Y-m-d H:i:s"),
-          "editedBy" => 0,
+          "editedBy" => $_USER->get("userId"),
           "edited" => date("Y-m-d H:i:s"),
           "events" => array()
         );
@@ -133,24 +134,25 @@ class SocialPost extends DB {
     
       }
     private function updatePostData($input){
+      global $_USER;
         foreach ($input as $key => $value) {
           if(isset($this->postData[$key]) && $this->postData[$key] != $value){
             $this->postData[$key] = $value;
           }
         }
+        $this->postData["editedBy"] = $_USER->get("userId");
+        $this->postData["edited"] = date("Y-m-d H:i:s");
         return $this->postData;
         }
     private function updateDatabase($input = array()){
         $this->updatepostData($input);
         $events = json_encode($this->postData["events"]);
-        $sql = $this->mysqli->prepare("UPDATE posts SET title = ?, dtStart = ?, dtEnd = ?,createdBy = ?,created = ?, editedBy = ?, edited = ?, events = ? WHERE pid = ?");
+        $sql = $this->mysqli->prepare("UPDATE posts SET title = ?, dtStart = ?, dtEnd = ?, editedBy = ?, edited = ?, events = ? WHERE pid = ?");
         echo($this->mysqli->error);
-        $sql->bind_param("sssisissi",
+        $sql->bind_param("sssissi",
             $this->postData["title"],
             $this->postData["dtStart"],
             $this->postData["dtEnd"],
-            $this->postData["createdBy"],
-            $this->postData["created"],
             $this->postData["editedBy"],
             $this->postData["edited"],
             $events,
@@ -187,30 +189,26 @@ class SocialPost extends DB {
 
     private function delete(){
         global $lan;
-        if($this->postData["status"] !== "entwurf"){
-          $lan->addError("Diese Rechnung wurde bereits abgeschlossen und kann nicht mehr gelöscht werden!");
-          return false;
-        }
-        $sql = $this->mysqli->prepare("DELETE FROM rechnungen WHERE pid = ?");
+        $sql = $this->mysqli->prepare("DELETE FROM posts WHERE pid = ?");
         $sql->bind_param("i", $this->pid);
         $sql->execute();
         if(empty($this->mysqli->error)){
-          $lan->addSuccess("Rechnung wurde gelöscht!");
-          header("Location: /rechnungen");
-          die();
+          $lan->addSuccess("Post wurde gelöscht!", "/");
         }else{
-          $lan->addError("Die Rechnung konnte nicht gelöscht werden: ".$this->mysqli->error);
+          $lan->addError("Der Post konnte nicht gelöscht werden: ".$this->mysqli->error, $_SERVER["REQUEST_URI"]);
           return false;
         }
-        }
+      }
 
     public function formAction($data){
         global $lan;
         if(isset($data["save_post"])){
-            $this->updateData($data);
+          $this->updateData($data);
+        }else if(isset($data["delete_post"])){
+          $this->delete();
         }
-        $lan->addError("Ungültige Aktion");
-        }
+        $lan->addError("Ungültige Aktion", $_SERVER["REQUEST_URI"]);
+      }
     
     public static function getAbteilungen(){
         $abteilungen = array(

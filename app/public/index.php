@@ -1,7 +1,7 @@
 <?php
 require_once("../inc/bootstrap.php");
 
-define("VERSION", "BETA v.0.1");
+define("VERSION", "BETA v.0.2");
 define("URL_BASE", "/");
 define("PATH_PAGES", __DIR__ . DIRECTORY_SEPARATOR . "pages" . DIRECTORY_SEPARATOR);
 define("PUBLIC_PAGES", array("login", "activate", "logout", "404", "join", "dbdebug"));
@@ -21,18 +21,17 @@ if (count($path)==1) {
 
 
 ob_start();
-
-if(file_exists(PATH_PAGES . $file)){
-  if(!in_array($path[0], PUBLIC_PAGES)){
-    $auth->check();
-    if($auth->isUserLoggedIn()){
-      $_USER = $auth->getLoggedInUser();
-    }else{
-      $_USER = array();
-    }
+if(!in_array($path[0], PUBLIC_PAGES)){
+  $auth->check();
+  if($auth->isUserLoggedIn()){
+    $_USER = $auth->getLoggedInUser();
+  }else{
+    $_USER = array();
   }
-  $messagesHtml = $lan->printMessages();
-  require PATH_PAGES . $file;
+}
+if(file_exists(PATH_PAGES . $file)){
+    $messagesHtml = $lan->printMessages();
+    require PATH_PAGES . $file;
 }else{
     require PATH_PAGES . "404.php";
     http_response_code(404);

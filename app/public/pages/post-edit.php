@@ -42,6 +42,7 @@ if(!empty($_POST)){
     <div class="form-group actions">
         <p class="form-group-title">Aktionen</p>
         <input type="submit" name="save_post" value="Post speichern">
+        <input type="submit" name="delete_post" value="Post löschen">
     </div>
 
 </form>

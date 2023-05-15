@@ -1,4 +1,5 @@
 <?php
+ini_set("date.timezone", "Europe/Berlin");
 session_start();
 require_once("class-logAndNotify.php");
 $lan = new LogAndNotify();
