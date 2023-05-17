@@ -18,6 +18,7 @@ class ContentCreator {
         $this->html .= $this->getGlobalStyles();
         $this->html .= $this->getBackground();
         $this->html .= $this->contentWrap($inner);
+        $this->html .= $this->getFooter();
     }
 
     public function addEvent(){
@@ -59,6 +60,7 @@ class ContentCreator {
             border-radius: 5px;
             overflow: hidden;
             box-shadow: 2px 2px 0px 0px white;
+            page-break-inside: avoid;
         }
 
         .vs-wrap{
@@ -75,6 +77,7 @@ class ContentCreator {
         }
         .match-info td{
             vertical-align: middle;
+            font-weight: bold;
         }
         .match-info .heim-logo, .match-info .gast-logo{
             background: white;
@@ -101,7 +104,9 @@ class ContentCreator {
         .evtitle{
             text-align: left;
             font-size: 1.4em;
-            font-weight:bold; 
+            font-family: 'Optika';
+            letter-spacing: -1px;
+            font-weight: normal;
         }
         .datetime{
             text-align: left;
@@ -143,17 +148,18 @@ class ContentCreator {
         <style>
             .svhead{
                 text-align: center;
-                font-size: 1.1em;
-                letter-spacing: 3px;
-                font-weight: 100;
+                font-size: 1em;
+                letter-spacing: 5px;
+                font-family: 'Celesta';
             }
 
             .mainhead{
                 text-transform: uppercase;
                 text-align: center;
-                font-size: 5em;
-                margin: 30px 0;
-                font-weight: 900;
+                font-size: 8em;
+                font-family: 'Blockpress';
+                margin: 30px 0 10px;
+                line-height: 0.85em;
             }
 
             h3.date{
@@ -164,12 +170,77 @@ class ContentCreator {
                 margin: 0 auto;
                 font-size: 2em;
                 border-radius: 5px;
+                font-family: 'Optika';
+                letter-spacing: -1px;
+            }
+            .header{
+                margin-bottom: 20px;
             }
         </style>
         <div class="header">
             <h2 class="svhead">SV "MOTOR" TAMBACH-DIETHARZ E.V.</h2>
             <h1 class="mainhead">Sportliche Highlights</h1>
-            <h3 class="date">14.05.2023 - 18.05.2023</h3>
+            <h3 class="date">Samstag, 18.05.2023</h3>
+        </div>
+        <?php return ob_get_clean();
+    }
+
+    private function getFooter(){
+        ob_start(); ?>
+        <style>
+            .footer{
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                background: rgb(14, 26, 42);
+                height: 1.1cm;
+                padding: 0.3cm 0 0 0;
+                color: white;
+                font-size: 0.8em;
+            }
+
+            .logosv{
+                position: absolute;
+                left: 30px;
+                top: -0.8cm;
+                width: auto;
+                height: 1.8cm;
+            }
+            .footertext{
+                margin-left: 6.3cm;
+            }
+            .footertext .sv{
+                font-weight: bold;
+                
+            }
+
+            .footertext .disclaimer{
+                font-size: 0.8em;
+                opacity: 0.8;
+            }
+
+            .sponsor{
+                position: absolute;
+                right: 30px;
+                text-align: right;
+                bottom: 0.2cm;
+            }
+            .sponsor img{
+                width: 1cm;
+                height: auto;
+                margin-right: 30px;
+            }
+        </style>
+        <div class="footer">
+
+            <div class="footertext">
+                <p class="sv">SV "Motor" Tambach-Dietharz e.V.</p>
+                <p class="disclaimer">Alle Angaben ohne Gewähr. Änderungen vorbehalten.</p>
+            </div>
+            <div class="sponsor"><img src="/app/inc/assets/img/logotnz.png" class="logosv" alt="Logo TNZ"></div>
+
+            <img src="/app/inc/assets/img/hplogo.png" class="logosv" alt="Logo Sportverein">
         </div>
         <?php return ob_get_clean();
     }
@@ -185,6 +256,7 @@ class ContentCreator {
                 color: white;
             }
         </style>
+        <?php echo $this->getFonts(); ?>
         <div class="content">
             <?php echo $content; ?>
         </div>
@@ -201,21 +273,64 @@ class ContentCreator {
                 width: 100%;
                 height: 100%;
                 z-index: 0;
-                background: black;
+                background-image: url("/app/inc/assets/img/bg.png");
+                background-size: contain;
             }
         </style>
         <div class="background"></div>
         <?php return ob_get_clean();
     }
 
+    private function getFonts(){
+        ob_start(); ?>
+        <style>
+            @font-face {
+                font-family: 'Jaguar';
+                src: url('/app/inc/assets/fonts/Jaguar.ttf') format('truetype');
+            }
+            @font-face {
+                font-family: 'Spotlight';
+                src: url('/app/inc/assets/fonts/SpotLight.ttf') format('truetype');
+            }
+            @font-face {
+                font-family: 'Blockpress';
+                src: url('/app/inc/assets/fonts/Blockpress.ttf') format('truetype');
+            }
+            @font-face {
+                font-family: 'Celesta';
+                font-weight: normal;
+                src: url('/app/inc/assets/fonts/Celesta.ttf') format('truetype');
+            }
+            @font-face {
+                font-family: 'Celesta';
+                font-weight: bold;
+                src: url('/app/inc/assets/fonts/CelestaBold.ttf') format('truetype');
+            } 
+            @font-face {
+                font-family: 'Optika';
+                font-weight: normal;
+                src: url('/app/inc/assets/fonts/OptikaBold.ttf') format('truetype');
+            } 
+        </style>
+        
+        <?php return ob_get_clean();
+    }
+
+    public function test(){
+        echo $this->getFonts();
+        echo $this->getHeader();
+    }
     private function getGlobalStyles(){
         ob_start(); ?>
         <style>
             @page{
                 margin: 0;
             }
+            h1, h2, h3, h4, h5, h6{
+                font-weight: normal;
+            }
             body {
-                font-family: Arial, Helvetica, sans-serif;
+                font-family: 'Celesta', Helvetica, sans-serif;
                 line-height: 1;
             }
             body *{
@@ -229,11 +344,21 @@ class ContentCreator {
     public function create(){
 
         $this->buildPdf();
-        
+        global $_dompdf_warnings;
+        $_dompdf_warnings = array();
+        //global $_dompdf_show_warnings;
+        //$_dompdf_show_warnings = true;
+        global $_dompdf_debug;
+        //$_dompdf_debug = true;
+
         $options = new Options();
-        //$options->set('isRemoteEnabled', true);
+        $options->set('isRemoteEnabled', true);
+        $options->setFontDir("/app/inc/assets/fonts");
+        $options->set('chroot', __DIR__);
+        //var_dump($options->get('chroot'));
         //$options->set("isPhpEnabled", true);
         $this->dompdf = new Dompdf($options);
+
 
         $this->dompdf->loadHtml($this->html);
         $this->dompdf->setPaper('A4', 'portrait');
@@ -242,5 +367,9 @@ class ContentCreator {
     public function output(){
         $this->dompdf->render();
         $this->dompdf->stream("dompdf_out.pdf", array("Attachment" => false));
+        //return;
+        global $_dompdf_warnings;
+        var_dump($_dompdf_warnings);
+        die();
     }
 }

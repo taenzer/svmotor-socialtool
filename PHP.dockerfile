@@ -20,3 +20,7 @@ RUN apt-get update && apt-get install -y \
     libzip-dev \
     unzip
 RUN docker-php-ext-install zip
+
+# Installing GD Extension for Image Processing
+RUN apt-get install -y libpng-dev
+RUN docker-php-ext-install gd

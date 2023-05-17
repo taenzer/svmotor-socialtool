@@ -1,0 +1,18 @@
+{
+    "jaguar": {
+        "normal": "jaguar_normal_fd83fa8d099ed948365b089f38969c2c"
+    },
+    "spotlight": {
+        "normal": "spotlight_normal_45409e90c4295dc2a59eff3aae1304cf"
+    },
+    "blockpress": {
+        "normal": "blockpress_normal_42ac57e19d8761c6f0da5a3c0a50866c"
+    },
+    "celesta": {
+        "normal": "\/app\/inc\/assets\/fonts\/celesta_normal_f2f7e92cb751a0cdc01a9d9b0d1841bc",
+        "bold": "celesta_bold_c92b9275bc528bc7d82892b951a9f29c"
+    },
+    "optika": {
+        "normal": "optika_normal_0dee548b3bb7a7307ce483f54a00ad74"
+    }
+}

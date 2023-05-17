@@ -1,5 +1,6 @@
 <?php
 ini_set("date.timezone", "Europe/Berlin");
+ini_set("memory_limit", "30M");
 session_start();
 require_once("class-logAndNotify.php");
 $lan = new LogAndNotify();
