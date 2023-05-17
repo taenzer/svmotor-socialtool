@@ -10,6 +10,9 @@ class ContentCreator {
     private $events = array();
     private $html = "";
     private $dompdf;
+    private $heading = "";
+    private $dtStart;
+    private $dtEnd;
 
     private function buildPdf(){
         $inner = $this->getHeader();
@@ -20,7 +23,18 @@ class ContentCreator {
         $this->html .= $this->contentWrap($inner);
         $this->html .= $this->getFooter();
     }
+    
+    public function setHeading($heading){
+        $this->heading = $heading;
+    }
 
+    public function setDtStart(DateTime $dtStart){
+        $this->dtStart = $dtStart;
+    }
+    public function setDtEnd(DateTime $dtEnd){
+        $this->dtEnd = $dtEnd;
+    }
+    
     public function addEvent(){
         $this->events[] = array(
             "art" => "match",
@@ -179,13 +193,31 @@ class ContentCreator {
         </style>
         <div class="header">
             <h2 class="svhead">SV "MOTOR" TAMBACH-DIETHARZ E.V.</h2>
-            <h1 class="mainhead">Sportliche Highlights</h1>
-            <h3 class="date">Samstag, 18.05.2023</h3>
+            <h1 class="mainhead"><?php echo $this->heading; ?></h1>
+            <h3 class="date"><?php echo $this->dateOutput(); ?></h3>
         </div>
         <?php return ob_get_clean();
     }
 
+    public function dateOutput(){
+        if(!isset($this->dtStart, $this->dtEnd)){
+            return "";
+        }
+        if($this->dtStart == $this->dtEnd){
+            $days = ["Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag", "Sonntag"];
+            return "{$days[$this->dtStart->format("N")]}, {$this->dtStart->format("d.m.Y")}";
+        }else{
+            if($this->dtStart->format("Y") == $this->dtEnd->format("Y")){
+                return "{$this->dtStart->format("d.m.")} - {$this->dtEnd->format("d.m.Y")}";
+            }else{
+                return "{$this->dtStart->format("d.m.Y")} - {$this->dtEnd->format("d.m.Y")}";
+            }
+            
+        }
+    }
+
     private function getFooter(){
+        return "";
         ob_start(); ?>
         <style>
             .footer{
@@ -273,7 +305,8 @@ class ContentCreator {
                 width: 100%;
                 height: 100%;
                 z-index: 0;
-                background-image: url("/app/inc/assets/img/bg.png");
+                /*background-image: url("/app/inc/assets/img/bg.png");*/
+                background-color: black;
                 background-size: contain;
             }
         </style>
