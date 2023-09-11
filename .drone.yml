@@ -5,11 +5,9 @@ name: sv-socialtool
 trigger:
   branch:
   - master
-
-clone:
-  disable: true
-
 pipeline:
+  clone:
+    disable: true
   deploy:
     image: appleboy/drone-ssh
     host:
