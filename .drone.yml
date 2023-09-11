@@ -1,13 +1,12 @@
 kind: pipeline
 type: docker
 name: sv-socialtool
-
+clone:
+  disable: true
 trigger:
   branch:
   - master
 pipeline:
-  clone:
-    disable: true
   deploy:
     image: appleboy/drone-ssh
     host:
