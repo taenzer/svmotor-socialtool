@@ -18,5 +18,5 @@ pipeline:
     command_timeout: 5m
     script:
       - cd /home/dockeradmin/docker/deploy/svmotor-socialtool
-      - gh repo pull taenzer/svmotor-socialtool
+      - gh repo sync
       - docker compose up -d
